@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       displayValue: 0,
       previousValue: null,
       operation: null,
       waitingForNewValue: false
     }
-  }
+  
 
   handleAddClick = (e) => {
     const currentVal = this.state.displayValue;
