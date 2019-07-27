@@ -68,14 +68,26 @@ class App extends Component {
   }
 
   handleMultiplyClick = (e) => {
+    const { previousValue } = this.state;
+
     const currentVal = this.state.displayValue;
-    this.setState({
-      operation: 'x',
-      previousValue: currentVal,
-    }, () => {
-      console.log(this.state)
-    });
+    const product = currentVal * previousValue; 
+    const newProduct = product * currentVal;
+
+    this.state.operation !== null ?
+      this.setState({ displayValue: product }, () => console.log(this.state)) :
+      this.setState({ operation: 'x', previousValue: currentVal, waitingForNewValue: false }, () => console.log(this.state));
+
   }
+
+/*
+0 state: 0, null, null, false
+2 state: displayVal (2), prevVal (null), op (null), waitForNewVal (F)
+x state: displayVal (2), prevVal (2), op (x), waitForNewVal (T)
+3 state: displayVal (3), prevVal (2), op (x), waitForNewVal (F)
+x state: displayVal (product, 6), prevVal (3), op (x), waitForNewVal (T)
+4 state: displayVal (newProduct, 24), prevVal (product, 6), op (x), waitForNewVal (F)
+*/
 
   handleNumClick = (e) => {
     const numDisplayed = this.state.displayValue;
